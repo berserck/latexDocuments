@@ -1,0 +1,399 @@
+\documentclass[12pt, a4paper,twoside]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+%use the fullpage package for somewhat standardized smaller margins
+\usepackage[cm]{fullpage}
+
+% for fancy section font and color
+\usepackage[x11names]{xcolor}
+\definecolor{section_color}{RGB}{00,66,99}             %section header color
+\definecolor{subsection_color}{RGB}{72, 138, 199}% subsection header color
+\definecolor{title_color}{RGB}{72, 138, 199}              % title color
+
+%improving on the abstract (changing color and size)
+\usepackage{abstract}
+\renewcommand{\abstractnamefont}{\color{section_color}\fontfamily{phv}\selectfont\LARGE}
+%\renewcommand{\abstracttextfont}{\normalfont}
+
+% fancy sections
+\usepackage{helvet}
+\usepackage{sectsty}
+\allsectionsfont{\color{section_color}\fontfamily{phv}\selectfont} 
+\subsectionfont{\color{subsection_color}} 
+
+  % header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields 
+\fancyhead[LO,RE]{\docurl} 
+\fancyhead[RO,LE]{\docver} 
+\fancyfoot{} % clear all footer fields 
+\fancyfoot[LE,RO]{\thepage} 
+\fancyfoot[LO,RE]{\authorinfo}
+\fancyfoot[CO,CE]{\today}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\def\mymaketitle{
+\thispagestyle{plain}
+\begin{center}
+\vspace*{1.1cm}
+\color{title_color}
+\fontfamily{phv}\selectfont\LARGE{\titleinfo}\\[0.4cm]
+\color{black}
+\large{\authorinfo}\\[0.3cm]
+\normalsize \authoremail
+\end{center}
+\vspace*{-0.5cm}
+}
+
+%fancy boxes
+\usepackage[tikz]{bclogo}
+\usepackage[blur]{pstricks}
+
+% information boxes
+\newenvironment{infobox}{%
+\bigskip
+\renewcommand\logowidth{40pt}
+\begin{bclogo}[logo=\bcinfo, couleur = LightSteelBlue1, epBarre = 4, couleurBarre = DeepSkyBlue3,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8, arrondi = 0.4,epOmbre = 0.18]{Information}%
+}
+{%
+\renewcommand\logowidth{17pt}
+\end{bclogo}%
+}%
+
+% warning boxes
+\newenvironment{warnbox}{%
+\renewcommand\logowidth{40pt}
+\bigskip
+\begin{bclogo}[logo=\bcattention, couleur = LightPink1, epBarre = 4, couleurBarre = Red1,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8,arrondi = 0.4, epOmbre = 0.15]{Warning}%
+}
+{%
+\renewcommand\logowidth{17pt}
+\end{bclogo}%
+}%
+
+
+%table stuff
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{multirow}
+%% more space between the caption and the object
+% important for the tables, they look ugly with the caption just sitting on top
+\setlength{\abovecaptionskip}{10pt}   % 0.5cm as an example
+\setlength{\belowcaptionskip}{10pt}   % 0.5cm as an example
+
+\usepackage{subcaption} % multiple figures each with its own caption
+%easily make the text 10^x
+\providecommand{\e}[1]{\ensuremath{\!\times\! 10^{#1}}}
+
+%missing:
+% for code use package istings
+
+% to generate filler text
+\usepackage{lipsum} 
+
+%to better include code
+\usepackage{listings}
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+\lstset{ %
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{black},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EDIT bellow: author and document info
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%fill the tile
+\newcommand{\titleinfo}{Documentation template in LaTeX}
+%fill the author
+\newcommand{\authorinfo}{Pedro  Parracho}
+\newcommand{\authoremail}{ pedro.parracho@gmail.com} 
+%fill documentation location
+\newcommand{\docurl}{} 
+ %update the version
+ \newcommand{\docver}{v1}
+ \newcommand{\docsubjectr}{Document Template by Pedro Parracho}
+ 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ % pdf stuff
+\usepackage[
+pdftex,colorlinks={false},
+urlcolor={black},
+pdfauthor={\authorinfo},
+pdftitle={\titleinfo},
+pdfsubject={\docsubjectr},
+pdffitwindow={false},
+pdfstartview={FitH},% Fit the page horizontal
+citebordercolor={white}, % no border in the cite links
+linkbordercolor={white},% no border in the links
+urlbordercolor={white}% no border in the url links
+]{hyperref}
+
+%title
+\title{\titleinfo}
+\author{\authorinfo \\ \authoremail }
+\date{}                                           % Activate to display a given date or no date
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\mymaketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+This is a template I wrote in order to have something to produce, nice,  small documents to in document stuff, mainly code.\\
+With that goal, I went through a bunch of packages, and leave here some settings I liked to use in my documents.
+The source of this document can also be useful for you to learn some tricks about how some of these packages.
+In this document I use \emph{fullpage} for smaller margins, \emph{xcolor} to define nice colors, \emph{abstract} to change abstract settings, \emph{fancyhdr} for the headers, \emph{sectsty} to redefine section title font, \emph{bclogo} and \emph{pstricks} for nice colorful boxes,  \emph{rotating},  \emph{booktabs} and   \emph{multirow} for tables, \emph{subcaption} for images side-by-side and, \emph{listings} to include code in the document.
+\end{abstract}
+
+%%%
+\section{Defined boxes}
+Sometimes you want to call out the attention of the reader for some important aspect or comment, with that in mind I defined two  types of text boxes, the info box and the warning box, that can be used with simple environments. 
+
+
+Here is the example of a info box: 
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{infobox} 
+this is the text that goes inside a info box $\phi$ \lipsum[1]
+\end{infobox}
+\end{lstlisting}
+
+That will look like this:
+
+\begin{infobox} 
+this is the text that goes inside a info box $\phi$ \lipsum[1]
+\end{infobox}
+
+
+And here is the example of a warning box:
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{warnbox} 
+ this is the text that goes inside a warning box $\Phi$  \lipsum[1]
+\end{warnbox}
+\end{lstlisting}
+
+\begin{warnbox} 
+ this is the text that goes inside a warning box $\Phi$  \lipsum[1]
+\end{warnbox}
+
+%%%
+\section{Images}
+Images are a important part of documentation, we must not forget them, as one image can be worth thousand words.
+
+\subsection{Single images}
+
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=.3\textwidth]{figs/fig1}
+\end{center}
+\caption[Inclision of a PNG]{Example of the inclusion of a PNG}
+\label{pngfig}
+\end{figure}
+
+Another example would be how to include a jpg in a document... This can be achieved by:
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=.3\textwidth]{figs/fig2}
+%% This line defines the with of the figure
+\end{center}
+\caption[Inclision of a JPEG]{Example of the inclusion of a JPEG}
+\label{jpgfig}
+\end{figure}
+\end{lstlisting}
+
+And the result can be seen Fig. \ref{jpgfig}.
+
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=.3\textwidth]{figs/fig2}
+\end{center}
+\caption[Inclision of a JPEG]{Example of the inclusion of a JPEG}
+\label{jpgfig}
+\end{figure}
+
+
+\subsection{Multiple Images}
+
+Here \ref{fig:side} we can see the 2 figures side by side.
+
+\begin{figure}[ht]
+\centering
+\resizebox{0.48\textwidth}{!}{%
+\includegraphics*{figs/fig1}}
+\hspace{\fill}
+\resizebox{0.48\textwidth}{!}{%
+\includegraphics*{figs/fig2}}
+\caption{An Example on how to place 2 pictures side by side.}
+\label{fig:side}
+\end{figure}
+
+ Now using the subcaption package that will allow for several captions, one under each figure. When can even refer to the left on using \ref{fig:PNG}.
+
+\begin{figure}[ht]
+\centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figs/fig1}
+                \caption{Image of a PNG}
+                \label{fig:PNG}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. 
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figs/fig2}
+                \caption{Image of a JPEG}
+                \label{fig:Jpeg}
+        \end{subfigure}
+        \caption{Two images side-by-side, with each having its caption}\label{fig:imagesside}
+\end{figure}
+
+%%%
+\section{Code}
+Here you will find how to add some code to the document
+the package listings is  a good way to include code.
+
+You can include the whole file:
+\lstinputlisting[language=Python,caption={Full Python file included in the text},label={cod:python}]{code/Python1.py}
+or just a snipet:
+\begin{lstlisting}[language={C++},caption={Snippet of C++ code  included in the text},label={cod:cpp}]
+/*
+* Function to print a vector to given stream
+*/
+template<typename T>
+void PrintVector(std::ostream& ostr, const std::vector<T>& t, 
+                              const std::string& delimiter = " ,")
+{
+    // This will print the vector
+    std::copy(t.begin(), t.end(), 
+                     std::ostream_iterator<T>(ostr, delimiter.c_str()));
+}
+\end{lstlisting}
+
+%%%
+\section{References used in the document}
+
+This I will place and example how to use references in \LaTeX, a very nice book to start is the wikibook of \LaTeX on the web \cite{bib:wikibook}. Don't forget that after adding references you will need to compile twice, for the references to show up correctly.
+
+%%%
+\section{Tables}
+Here I'm going to spread around a few tables, just to get a feel for it.
+\subsection{Horizontal}
+Here you find a nice horizontal table \ref{tab:ThisIsAHorizontalTable} in page \pageref{tab:ThisIsAHorizontalTable}.
+
+\begin{table}
+	\caption{This is a horizontal table}
+	\label{tab:ThisIsAHorizontalTable}
+	\centering
+      \begin{tabular}{l r @{.} l r @{.} l r @{.} l r @{.} l r @{.} l}
+         \toprule
+                      &    \multicolumn{ 10}{c}{Activity  $[$Bq$]$ } \\
+         \cmidrule(l){2-11}
+                      &    \multicolumn{2}{c}{15 days} &   \multicolumn{2}{c}{3 months} &   \multicolumn{2}{c}{6 months} &      \multicolumn{2}{c}{1 year} &    \multicolumn{2}{c}{2 years} \\
+         \midrule
+         $^{37}$Ar    &   $1$&$02\times 10^{10}$ &  $2$&$22\times 10^{9}$ &   $3$&$66\times 10^{8}$ &   $9$&$95\times 10^{6}$&   $7$&$22\times 10^{3}$ \\                                                                                                                                 
+         $^{39}$Ar    &   $1$&$24\times 10^{7 }$ &  $1$&$24\times 10^{7}$ &   $1$&$24\times 10^{7}$ &   $1$&$24\times 10^{7}$&   $1$&$24\times 10^{7}$ \\                                                                                                                                  
+         $^{22}$Na    &   $3$&$26\times 10^{7 }$ &  $3$&$09\times 10^{7}$ &   $2$&$89\times 10^{7}$ &   $2$&$53\times 10^{7}$&   $1$&$94\times 10^{7}$ \\                                                                                                                                  
+         $^{35}$S     &   $5$&$65\times 10^{8 }$ &  $3$&$07\times 10^{8}$ &   $1$&$49\times 10^{8}$ &   $3$&$53\times 10^{7}$&   $1$&$96\times 10^{6}$ \\                                                                                                                                  
+         $^{33}$P     &   $7$&$63\times 10^{8 }$ &  $9$&$25\times 10^{7}$ &   $7$&$64\times 10^{6}$ &   $5$&$22\times 10^{4}$&   $2$&$37$ \\                                                                                                                                   
+         $^{32}$P     &   $1$&$25\times 10^{9 }$ &  $3$&$16\times 10^{7}$ &   $1$&$98\times 10^{6}$ &   $1$&$61\times 10^{6}$&   $1$&$60\times 10^{6}$ \\                                                                                                                                
+         $^{32}$Si    &   $1$&$62\times 10^{6 }$ &  $1$&$62\times 10^{6}$ &   $1$&$61\times 10^{6}$ &   $1$&$61\times 10^{6}$&   $1$&$60\times 10^{6}$ \\                                                                                                                                  
+         $^{3}$H      &   $6$&$08\times 10^{8 }$ &  $6$&$01\times 10^{8}$ &   $5$&$93\times 10^{8}$ &   $5$&$76\times 10^{8}$&   $5$&$45\times 10^{8}$ \\                                                                                                                                   
+         $^{7}$Be     &   $2$&$16\times 10^{8 }$ &  $7$&$88\times 10^{7}$ &   $2$&$40\times 10^{7}$ &   $2$&$22\times 10^{6}$&   $1$&$87\times 10^{4}$ \\                                                                                                                                   
+         $^{207}$Bi   &   $1$&$66\times 10^{5 }$ &  $1$&$66\times 10^{5}$ &   $1$&$65\times 10^{5}$ &   $1$&$63\times 10^{5}$&   $1$&$59\times 10^{5}$ \\                                                                                                                                   
+         $^{241}$Am   &   $5$&$00\times 10^{3 }$ &  $5$&$00\times 10^{3}$ &   $5$&$00\times 10^{3}$ &   $4$&$99\times 10^{3}$&   $4$&$98\times 10^{3}$ \\
+         \bottomrule
+      \end{tabular}
+\end{table}          
+
+\subsection{Vertical}
+%%%%%%%%%%%%%
+Were you can find how to place vertically a table that is too wide to fit horizontaly, see \ref{tab:ThisIsAVerticalTable} in page \pageref{tab:ThisIsAVerticalTable}.
+\begin{sidewaystable}
+%\begin{table}
+   \caption{This is a vertical table}
+	\label{tab:ThisIsAVerticalTable}
+   \centering    
+   \begin{tabular}{r c c c c c c}
+      \toprule
+                &         15 days &         1 month &        3 months &        6 months &          1 year &         2 years \\
+      \midrule
+Effective dose to Infants$[$Sv$]$ & \multirow{ 2}*{$7.82\times 10 ^{-7}$} & \multirow{2}*{$7.42\times 10 ^{-7}$} & \multirow{2}*{$6.71\times 10 ^{-7}$} & \multirow{2}*{$6.19\times 10 ^{-7}$} & \multirow{2}*{$5.39\times 10 ^{-7}$} & \multirow{2}*{$4.14\times 10 ^{-7}$} \\
+Ext. exposure \& Inhalation & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\midrule
+Effective dose to Adults $[$Sv$]$ & \multirow{2}*{$7.77\times 10 ^{-7}$} & \multirow{2}*{$7.40\times 10 ^{-7}$} & \multirow{2}*{$6.70\times 10 ^{-7}$} & \multirow{2}*{$6.17\times 10 ^{-7}$} & \multirow{2}*{$5.38\times 10 ^{-7}$} & \multirow{2}*{$4.14\times 10 ^{-7}$} \\
+
+Ext. exposure \& Inhalation & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\midrule
+Effective dose to Infants $[$Sv$]$ & \multirow{2}*{$2.79\times 10 ^{-4}$} & \multirow{2}*{$1.55\times 10 ^{-4}$} & \multirow{2}*{$3.70\times 10 ^{-5}$} & \multirow{2}*{$2.56\times 10 ^{-5}$} & \multirow{2}*{$2.07\times 10 ^{-5}$} & \multirow{2}*{$1.55\times 10 ^{-5}$} \\
+
+Ingestion, summer release & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\midrule
+Effective dose to Adults $[$Sv$]$ & \multirow{2}*{$5.03\times 10 ^{-5}$} & \multirow{2}*{$2.98\times 10 ^{-5}$} & \multirow{2}*{$9.86\times 10 ^{-6}$} & \multirow{2}*{$7.46\times 10 ^{-6}$} & \multirow{2}*{$6.07\times 10 ^{-6}$} & \multirow{2}*{$4.56\times 10 ^{-6}$} \\
+
+Ingestion, summer release & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\midrule
+Effective dose to Infants $[$Sv$]$ & \multirow{2}*{$4.95\times 10 ^{-7}$} & \multirow{2}*{$4.75\times 10 ^{-7}$} & \multirow{2}*{$4.19\times 10 ^{-7}$} & \multirow{2}*{$3.67\times 10 ^{-7}$} & \multirow{2}*{$3.05\times 10 ^{-7}$} & \multirow{2}*{$2.30\times 10 ^{-7}$} \\
+
+Ingestion, winter release & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\midrule
+Effective dose to Adults $[$Sv$]$ & \multirow{2}*{$4.95\times 10 ^{-7}$} & \multirow{2}*{$4.75\times 10 ^{-7}$} & \multirow{2}*{$4.19\times 10 ^{-7}$} & \multirow{2}*{$3.67\times 10 ^{-7}$} & \multirow{2}*{$3.05\times 10 ^{-7}$} & \multirow{2}*{$2.30\times 10 ^{-7}$} \\
+
+Ingestion. winter release & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} & \multirow{2}*{} \\
+\bottomrule
+\end{tabular}  
+%\end{table}
+\end{sidewaystable}
+
+
+\begin{thebibliography}{9} %up to 10 references
+
+\bibitem{bib:wikibook}  \emph{Wikibook on \LaTeX }, \url{http://en.wikibooks.org/wiki/LaTeX}
+
+
+\end{thebibliography}
+
+\end{document}  
