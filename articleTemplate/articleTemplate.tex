@@ -61,10 +61,10 @@
 \usepackage[blur]{pstricks}
 
 % information boxes
-\newenvironment{infobox}{%
+\newenvironment{infobox}[1][Information]{%
 \bigskip
 \renewcommand\logowidth{40pt}
-\begin{bclogo}[logo=\bcinfo, couleur = LightSteelBlue1, epBarre = 4, couleurBarre = DeepSkyBlue3,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8, arrondi = 0.4,epOmbre = 0.18]{Information}%
+\begin{bclogo}[logo=\bcinfo, couleur = LightSteelBlue1, epBarre = 4, couleurBarre = DeepSkyBlue3,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8, arrondi = 0.4,epOmbre = 0.18]{#1}%
 }
 {%
 \renewcommand\logowidth{17pt}
@@ -72,10 +72,10 @@
 }%
 
 % warning boxes
-\newenvironment{warnbox}{%
+\newenvironment{warnbox}[1][Warning]{%
 \renewcommand\logowidth{40pt}
 \bigskip
-\begin{bclogo}[logo=\bcattention, couleur = LightPink1, epBarre = 4, couleurBarre = Red1,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8,arrondi = 0.4, epOmbre = 0.15]{Warning}%
+\begin{bclogo}[logo=\bcattention, couleur = LightPink1, epBarre = 4, couleurBarre = Red1,ombre = true, couleurOmbre = Snow3,blur, noborder = true, marge=8,arrondi = 0.4, epOmbre = 0.15]{#1}%
 }
 {%
 \renewcommand\logowidth{17pt}
@@ -220,6 +220,19 @@ And here is the example of a warning box:
 \begin{warnbox} 
  this is the text that goes inside a warning box $\Phi$  \lipsum[1]
 \end{warnbox}
+
+
+Both boxes accept a optional argument, to change the title of the boxes, like in the example:
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{infobox} [My String goes in info box]
+ This is an Infor box with a personalized title.
+\end{infobox}
+\end{lstlisting}
+That will look like:
+\begin{infobox} [My String goes in info box]
+ This is an Infor box with a personalized title.
+\end{infobox}
+
 
 %%%
 \section{Images}
