@@ -9,3 +9,6 @@ articleTemplate - a LaTeX template for small documents, very nice looking.
 ##Screenshot
 
 ![ScreenShot](screenshot.png)
+
+## License
+This code is licensed with MIT License
